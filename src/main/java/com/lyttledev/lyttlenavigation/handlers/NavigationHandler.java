@@ -1,8 +1,9 @@
 package com.lyttledev.lyttlenavigation.handlers;
 
 import com.lyttledev.lyttlenavigation.LyttleNavigation;
-import com.lyttledev.lyttleutils.utils.gameplay.ActionBar;
+import com.lyttledev.lyttleutils.types.Message.Replacements;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,9 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.HashMap;
 
 public class NavigationHandler implements Listener {
     private final LyttleNavigation plugin;
@@ -80,7 +84,7 @@ public class NavigationHandler implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        ActionBar.setActionBar(false, player, null, plugin);
+        setActionBar(false, player, null, null);
     }
 
     @EventHandler
@@ -96,7 +100,17 @@ public class NavigationHandler implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        ActionBar.setActionBar(false, player, null, plugin);
+        setActionBar(false, player, null, null);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            ItemStack mainHand = player.getInventory().getItemInMainHand();
+            ItemStack offHand = player.getInventory().getItemInOffHand();
+            handleNavigationUpdate(player, mainHand, offHand);
+        });
     }
 
     @EventHandler
@@ -138,20 +152,87 @@ public class NavigationHandler implements Listener {
         } else if (offActive) {
             handleNavigation(player, offHand, "off hand");
         } else {
-            ActionBar.setActionBar(false, player, null, plugin);
+            setActionBar(false, player, null, null);
         }
     }
 
     private boolean isNavigationItem(ItemStack item) {
         if (item == null) return false;
         Material type = item.getType();
-        return type == Material.COMPASS || type == Material.CLOCK;
+        // Check if the type is inside the config
+        String message = (String) plugin.config.general.get(type.name());
+        return message != null && !message.isEmpty();
     }
 
     private void handleNavigation(Player player, ItemStack item, String hand) {
-        Component message = plugin.miniMessage.deserialize(
-                "<green>Navigation active! <yellow>Using " + item.getType().name().toLowerCase() + " in " + hand + ".</yellow>"
-        );
-        ActionBar.setActionBar(true, player, message, plugin);
+        setActionBar(true, player, item, hand);
+    }
+
+    private final HashMap<Player, BukkitTask> activeActionBars = new HashMap();
+
+    public void setActionBar(boolean active, Player player, ItemStack item, String hand) {
+        BukkitTask oldActionBarTask = (BukkitTask) activeActionBars.get(player);
+        if (oldActionBarTask != null) {
+            oldActionBarTask.cancel();
+            activeActionBars.remove(player);
+        }
+
+        if (active && item != null && item.getType() != Material.AIR && hand != null) {
+            double updateRateInSeconds = (double) plugin.config.general.get("update_rate");
+            long updateRate = Math.round(updateRateInSeconds * 20); // Convert seconds to ticks (20 ticks = 1 second)
+            BukkitTask newActionBarTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+                Replacements replacements = new Replacements.Builder()
+                        .add("hand", hand)
+                        .add("item", item.getType().name())
+                        .add("<PLAYER_FACING>", getFacing(player))
+                        .add("<SERVER_TIME_24_H>", getServerTime24H(player))
+                        .add("<STATISTIC_TOTAL_SERVER_DAYS>", getTotalServerDays(player))
+                        .build();
+                String configMessage = (String) plugin.config.general.get(item.getType().name());
+                Component message = plugin.message.getMessageRaw(configMessage, replacements, player);
+
+                player.sendActionBar(message);
+            }, 0L, updateRate);
+            activeActionBars.put(player, newActionBarTask);
+        }
+    }
+
+    private String getFacing(Player player) {
+        // Get yaw in degrees, normalize to [0, 360)
+        float yaw = player.getLocation().getYaw();
+        yaw = (yaw % 360 + 360) % 360;
+        // The following directions use Minecraft's standard compass layout
+        if (yaw >= 337.5 || yaw < 22.5)
+            return "South";
+        if (yaw < 67.5)
+            return "South-West";
+        if (yaw < 112.5)
+            return "West";
+        if (yaw < 157.5)
+            return "North-West";
+        if (yaw < 202.5)
+            return "North";
+        if (yaw < 247.5)
+            return "North-East";
+        if (yaw < 292.5)
+            return "East";
+        if (yaw < 337.5)
+            return "South-East";
+        return "Unknown";
+    }
+
+    private String getServerTime24H(Player player) {
+        // Returns the local time of day for the player's current world in 24h format
+        long ticks = player.getWorld().getTime(); // 0–23999, 0 = 6:00
+        long hours = (ticks / 1000 + 6) % 24;
+        long minutes = (ticks % 1000) * 60 / 1000;
+        return String.format("%02d:%02d", hours, minutes);
+    }
+
+    private String getTotalServerDays(Player player) {
+        // Returns the total days since world creation for the player's current world
+        long totalTicks = player.getWorld().getFullTime(); // Cumulative ticks since world creation
+        long totalDays = totalTicks / 24000;
+        return String.valueOf(totalDays);
     }
 }

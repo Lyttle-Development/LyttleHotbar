@@ -41,7 +41,7 @@ public final class LyttleNavigation extends JavaPlugin {
         this.compassHandler = new NavigationHandler(this);
 
         // Export Material list on plugin startup (only if file doesn't exist)
-        File materialsFile = new File(getDataFolder(), "../resources/available_materials.txt");
+        File materialsFile = new File(getDataFolder(), "available_materials.txt");
         try {
             if (!materialsFile.exists()) {
                 MaterialExporter.exportMaterials(materialsFile);
@@ -77,17 +77,16 @@ public final class LyttleNavigation extends JavaPlugin {
         }
 
         switch (config.general.get("config_version").toString()) {
-            case "0":
-                // Migrate config entries.
-                config.general.set("nametag", config.messages.get("nametag"));
-                config.messages.remove("nametag");
-
-                // Update config version.
-                config.general.set("config_version", 1);
-
-                // Recheck if the config is fully migrated.
-                migrateConfig();
-                break;
+//            case "0":
+//                // Migrate config entries.
+//                // config.general.set("x", config.defaultGeneral.get("x"));
+//
+//                // Update config version.
+//                config.general.set("config_version", 1);
+//
+//                // Recheck if the config is fully migrated.
+//                migrateConfig();
+//                break;
             default:
                 break;
         }
