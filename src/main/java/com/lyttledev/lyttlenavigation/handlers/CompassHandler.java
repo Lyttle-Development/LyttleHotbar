@@ -39,15 +39,5 @@ public class CompassHandler implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // Delay creation to ensure player is fully loaded
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            spawnNametag(event.getPlayer());
-
-            // Show existing nametags to the joining player
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                if (onlinePlayer.equals(event.getPlayer())) continue;
-                showNametagToPlayer(onlinePlayer, event.getPlayer());
-            }
-        }, 10L); // Run after 10 ticks (0.5 seconds)
     }
 }

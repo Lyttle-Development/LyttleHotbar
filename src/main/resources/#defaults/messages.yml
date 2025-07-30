@@ -1,5 +1,5 @@
 ####################################################
-#          Lyttle Nametag - messages.yml           #
+#          Lyttle Nametag - Messages.yml           #
 ####################################################
 # This file contains all in-game messages used by the plugin.
 # You can use MiniMessage formatting and Minecraft color codes.
@@ -11,7 +11,7 @@
 ################
 # Message Prefix
 ################
-prefix: <dark_aqua><bold>Lyttle<aqua><bold>Nametag<reset> <dark_gray>- <gray>
+prefix: <dark_aqua><bold>Lyttle<aqua><bold>Navigation<reset> <dark_gray>- <gray>
 
 ##########################
 # Generic Error Messages #

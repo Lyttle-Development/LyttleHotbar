@@ -1,7 +1,7 @@
 package com.lyttledev.lyttlenavigation;
 
 import com.lyttledev.lyttlenavigation.commands.*;
-import com.lyttledev.lyttlenavigation.handlers.NametagHandler;
+import com.lyttledev.lyttlenavigation.handlers.*;
 import com.lyttledev.lyttlenavigation.types.Configs;
 
 import com.lyttledev.lyttleutils.utils.communication.Console;
@@ -16,7 +16,7 @@ public final class LyttleNavigation extends JavaPlugin {
     public Console console;
     public Message message;
     public GlobalConfig global;
-    public NametagHandler nametagHandler;
+    public CompassHandler compassHandler;
 
     @Override
     public void onEnable() {
@@ -35,12 +35,7 @@ public final class LyttleNavigation extends JavaPlugin {
         new LyttleNavigationCommand(this);
 
         // Handlers
-        this.nametagHandler = new NametagHandler(this);
-    }
-
-    @Override
-    public void onDisable() {
-        this.nametagHandler.removeAllNametagsOnShutdown();
+        this.compassHandler = new CompassHandler(this);
     }
 
     @Override
