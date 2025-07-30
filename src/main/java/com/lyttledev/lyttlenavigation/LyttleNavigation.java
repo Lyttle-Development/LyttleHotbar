@@ -1,0 +1,86 @@
+package com.lyttledev.lyttlenavigation;
+
+import com.lyttledev.lyttlenavigation.commands.*;
+import com.lyttledev.lyttlenavigation.handlers.NametagHandler;
+import com.lyttledev.lyttlenavigation.types.Configs;
+
+import com.lyttledev.lyttleutils.utils.communication.Console;
+import com.lyttledev.lyttleutils.utils.communication.Message;
+import com.lyttledev.lyttleutils.utils.storage.GlobalConfig;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+
+public final class LyttleNavigation extends JavaPlugin {
+    public Configs config;
+    public Console console;
+    public Message message;
+    public GlobalConfig global;
+    public NametagHandler nametagHandler;
+
+    @Override
+    public void onEnable() {
+        saveDefaultConfig();
+        // Setup config after creating the configs
+        this.config = new Configs(this);
+        this.global = new GlobalConfig(this);
+        // Migrate config
+        migrateConfig();
+
+        // Plugin startup logic
+        this.console = new Console(this);
+        this.message = new Message(this, config.messages, global);
+
+        // Commands
+        new LyttleNavigationCommand(this);
+
+        // Handlers
+        this.nametagHandler = new NametagHandler(this);
+    }
+
+    @Override
+    public void onDisable() {
+        this.nametagHandler.removeAllNametagsOnShutdown();
+    }
+
+    @Override
+    public void saveDefaultConfig() {
+        String configPath = "config.yml";
+        if (!new File(getDataFolder(), configPath).exists())
+            saveResource(configPath, false);
+
+        String messagesPath = "messages.yml";
+        if (!new File(getDataFolder(), messagesPath).exists())
+            saveResource(messagesPath, false);
+
+        // Defaults:
+        String defaultPath = "#defaults/";
+        String defaultGeneralPath =  defaultPath + configPath;
+        saveResource(defaultGeneralPath, true);
+
+        String defaultMessagesPath =  defaultPath + messagesPath;
+        saveResource(defaultMessagesPath, true);
+    }
+
+    private void migrateConfig() {
+        if (!config.general.contains("config_version")) {
+            config.general.set("config_version", 0);
+        }
+
+        switch (config.general.get("config_version").toString()) {
+            case "0":
+                // Migrate config entries.
+                config.general.set("nametag", config.messages.get("nametag"));
+                config.messages.remove("nametag");
+
+                // Update config version.
+                config.general.set("config_version", 1);
+
+                // Recheck if the config is fully migrated.
+                migrateConfig();
+                break;
+            default:
+                break;
+        }
+    }
+}
