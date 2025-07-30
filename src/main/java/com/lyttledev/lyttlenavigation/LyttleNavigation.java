@@ -1,12 +1,12 @@
 package com.lyttledev.lyttlenavigation;
 
-import com.lyttledev.lyttlenavigation.commands.*;
-import com.lyttledev.lyttlenavigation.handlers.*;
+import com.lyttledev.lyttlenavigation.commands.LyttleNavigationCommand;
+import com.lyttledev.lyttlenavigation.handlers.NavigationHandler;
 import com.lyttledev.lyttlenavigation.types.Configs;
-
 import com.lyttledev.lyttleutils.utils.communication.Console;
 import com.lyttledev.lyttleutils.utils.communication.Message;
 import com.lyttledev.lyttleutils.utils.storage.GlobalConfig;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -16,7 +16,8 @@ public final class LyttleNavigation extends JavaPlugin {
     public Console console;
     public Message message;
     public GlobalConfig global;
-    public CompassHandler compassHandler;
+    public NavigationHandler compassHandler;
+    public MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
     public void onEnable() {
@@ -35,7 +36,7 @@ public final class LyttleNavigation extends JavaPlugin {
         new LyttleNavigationCommand(this);
 
         // Handlers
-        this.compassHandler = new CompassHandler(this);
+        this.compassHandler = new NavigationHandler(this);
     }
 
     @Override
@@ -50,10 +51,10 @@ public final class LyttleNavigation extends JavaPlugin {
 
         // Defaults:
         String defaultPath = "#defaults/";
-        String defaultGeneralPath =  defaultPath + configPath;
+        String defaultGeneralPath = defaultPath + configPath;
         saveResource(defaultGeneralPath, true);
 
-        String defaultMessagesPath =  defaultPath + messagesPath;
+        String defaultMessagesPath = defaultPath + messagesPath;
         saveResource(defaultMessagesPath, true);
     }
 
