@@ -1,4 +1,4 @@
-package com.lyttledev.lyttlenavigation.utils;
+package com.lyttledev.lyttlehotbar.utils;
 
 import org.bukkit.Material;
 

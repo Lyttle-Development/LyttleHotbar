@@ -1,7 +1,7 @@
-name: LyttleNavigation
-description: Custom nametags plugin
+name: LyttleHotbar
+description: Minimal, real-time Minecraft navigation overlay with direction, time, and server day tracking
 version: '${projectVersion}'
-main: com.lyttledev.lyttlenavigation.LyttleNavigation
+main: com.lyttledev.lyttlehotbar.LyttleHotbar
 api-version: '1.21'
 authors:
   - LyttleDevelopment
@@ -15,6 +15,6 @@ softdepend:
   - PlaceholderAPI
 
 commands:
-  lyttlenavigation:
+  lyttlehotbar:
     description: Admin command, mainly reload the config without the rest of the server
-    permission: lyttlenavigation.lyttlenavigation
+    permission: lyttlehotbar.lyttlehotbar

@@ -1,6 +1,6 @@
 <div align="center">
 
-# Lyttle Navigation
+# Lyttle Hotbar
 
 [![Paper](https://img.shields.io/badge/Paper-1.21.x-blue)](https://papermc.io)
 [![Hangar](https://img.shields.io/badge/Hangar-download-success)](https://hangar.papermc.io/Lyttle-Development)
@@ -45,18 +45,18 @@
 
 > 💡 `<required>` `[optional]`
 
-| Command                    | Permission                | Description                  |
-|:---------------------------|:--------------------------|:-----------------------------|
-| `/lyttlenavigation reload` | `lyttlenavigation.reload` | Reloads plugin configuration |
+| Command                | Permission            | Description                  |
+|:-----------------------|:----------------------|:-----------------------------|
+| `/lyttlehotbar reload` | `lyttlehotbar.reload` | Reloads plugin configuration |
 
 ---
 
 ## 🔑 Permissions
 
-| Permission Node           | Description                      | Default |
-|:--------------------------|:---------------------------------|:--------|
-| `lyttlenavigation.*`      | Grants all plugin permissions    | ❌       |
-| `lyttlenavigation.reload` | Allows reloading config/messages | ❌       |
+| Permission Node       | Description                      | Default |
+|:----------------------|:---------------------------------|:--------|
+| `lyttlehotbar.*`      | Grants all plugin permissions    | ❌       |
+| `lyttlehotbar.reload` | Allows reloading config/messages | ❌       |
 
 ---
 
@@ -132,8 +132,8 @@ The folder serves several important purposes:
 
 [![Discord](https://img.shields.io/discord/941334383216967690?color=7289DA&label=Join%20Our%20Discord&logo=discord&logoColor=ffffff&style=for-the-badge)](https://discord.gg/QfqFFPFFQZ)
 
-🐛 Found a bug? [Open an Issue](https://github.com/Lyttle-Development/LyttleNavigation/issues)  
-💡 Have a suggestion? [Share your idea](https://github.com/Lyttle-Development/LyttleNavigation/issues)
+🐛 Found a bug? [Open an Issue](https://github.com/Lyttle-Development/LyttleHotbar/issues)  
+💡 Have a suggestion? [Share your idea](https://github.com/Lyttle-Development/LyttleHotbar/issues)
 
 </div>
 

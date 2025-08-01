@@ -1,6 +1,6 @@
-package com.lyttledev.lyttlenavigation.commands;
+package com.lyttledev.lyttlehotbar.commands;
 
-import com.lyttledev.lyttlenavigation.LyttleNavigation;
+import com.lyttledev.lyttlehotbar.LyttleHotbar;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,18 +9,18 @@ import org.bukkit.command.TabCompleter;
 
 import java.util.List;
 
-public class LyttleNavigationCommand implements CommandExecutor, TabCompleter {
-    private final LyttleNavigation plugin;
+public class LyttleHotbarCommand implements CommandExecutor, TabCompleter {
+    private final LyttleHotbar plugin;
 
-    public LyttleNavigationCommand(LyttleNavigation plugin) {
-        plugin.getCommand("lyttlenavigation").setExecutor(this);
+    public LyttleHotbarCommand(LyttleHotbar plugin) {
+        plugin.getCommand("lyttlehotbar").setExecutor(this);
         this.plugin = plugin;
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         // Check for permission
-        if (!(sender.hasPermission("lyttlenavigation.lyttlenavigation"))) {
+        if (!(sender.hasPermission("lyttlehotbar.lyttlehotbar"))) {
             plugin.message.sendMessage(sender, "no_permission");
             return true;
         }

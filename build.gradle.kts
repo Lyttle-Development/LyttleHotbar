@@ -38,7 +38,7 @@ dependencies {
 
 group = "com.lyttledev"
 version = (property("pluginVersion") as String)
-description = "LyttleNavigation"
+description = "LyttleHotbar"
 java.sourceCompatibility = JavaVersion.VERSION_21
 
 // --- Shadow JAR configuration ---

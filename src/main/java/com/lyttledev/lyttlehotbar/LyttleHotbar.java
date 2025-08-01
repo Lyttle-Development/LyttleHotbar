@@ -1,9 +1,9 @@
-package com.lyttledev.lyttlenavigation;
+package com.lyttledev.lyttlehotbar;
 
-import com.lyttledev.lyttlenavigation.commands.LyttleNavigationCommand;
-import com.lyttledev.lyttlenavigation.handlers.NavigationHandler;
-import com.lyttledev.lyttlenavigation.types.Configs;
-import com.lyttledev.lyttlenavigation.utils.MaterialExporter;
+import com.lyttledev.lyttlehotbar.commands.LyttleHotbarCommand;
+import com.lyttledev.lyttlehotbar.handlers.NavigationHandler;
+import com.lyttledev.lyttlehotbar.types.Configs;
+import com.lyttledev.lyttlehotbar.utils.MaterialExporter;
 import com.lyttledev.lyttleutils.utils.communication.Console;
 import com.lyttledev.lyttleutils.utils.communication.Message;
 import com.lyttledev.lyttleutils.utils.storage.GlobalConfig;
@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-public final class LyttleNavigation extends JavaPlugin {
+public final class LyttleHotbar extends JavaPlugin {
     public Configs config;
     public Console console;
     public Message message;
@@ -35,7 +35,7 @@ public final class LyttleNavigation extends JavaPlugin {
         this.message = new Message(this, config.messages, global);
 
         // Commands
-        new LyttleNavigationCommand(this);
+        new LyttleHotbarCommand(this);
 
         // Handlers
         this.compassHandler = new NavigationHandler(this);

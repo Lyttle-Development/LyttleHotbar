@@ -1,6 +1,6 @@
-package com.lyttledev.lyttlenavigation.handlers;
+package com.lyttledev.lyttlehotbar.handlers;
 
-import com.lyttledev.lyttlenavigation.LyttleNavigation;
+import com.lyttledev.lyttlehotbar.LyttleHotbar;
 import com.lyttledev.lyttleutils.types.Message.Replacements;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -19,9 +19,9 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 
 public class NavigationHandler implements Listener {
-    private final LyttleNavigation plugin;
+    private final LyttleHotbar plugin;
 
-    public NavigationHandler(LyttleNavigation plugin) {
+    public NavigationHandler(LyttleHotbar plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

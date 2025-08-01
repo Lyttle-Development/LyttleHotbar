@@ -1,10 +1,10 @@
-package com.lyttledev.lyttlenavigation.types;
+package com.lyttledev.lyttlehotbar.types;
 
-import com.lyttledev.lyttlenavigation.LyttleNavigation;
+import com.lyttledev.lyttlehotbar.LyttleHotbar;
 import com.lyttledev.lyttleutils.types.Config;
 
 public class Configs {
-    private final LyttleNavigation plugin;
+    private final LyttleHotbar plugin;
 
     // Configs
     public Config general;
@@ -15,7 +15,7 @@ public class Configs {
     public Config defaultMessages;
 
 
-    public Configs(LyttleNavigation plugin) {
+    public Configs(LyttleHotbar plugin) {
         this.plugin = plugin;
 
         // Configs
