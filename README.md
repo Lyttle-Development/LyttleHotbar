@@ -1,16 +1,16 @@
 <div align="center">
-
-# Lyttle Hotbar
+  
+# LyttleHotbar
 
 [![Paper](https://img.shields.io/badge/Paper-1.21.x-blue)](https://papermc.io)
 [![Hangar](https://img.shields.io/badge/Hangar-download-success)](https://hangar.papermc.io/Lyttle-Development)
 [![Discord](https://img.shields.io/discord/941334383216967690?color=7289DA&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/QfqFFPFFQZ)
 
-<img src="https://raw.githubusercontent.com/Lyttle-Development/LyttleUtils/main/banner_navigation.png" alt="Navigation Banner" width="700px">
+<img src="https://raw.githubusercontent.com/Lyttle-Development/LyttleUtils/main/navigation_showcase.gif" alt="Plugin Banner" width="700px">
 
-> 🧭 **Minimal, real-time Minecraft navigation overlay with direction, time, and server day tracking** 🧭
+> ✨ **The ultimate lightweight navigation bar and actionbar overlay plugin for modern Minecraft servers.** ✨
 
-[📚 Features](#-features) • [⌨️ Commands](#-commands) • [🔑 Permissions](#-permissions) • [📥 Installation](#-installation) • [⚙️ Configuration](#-configuration) • [💬 Support](#-support)
+[📚 Features](#--features) • [⌨️ Commands](#-%EF%B8%8F-commands) • [🔑 Permissions](#--permissions) • [📥 Installation](#--installation) • [⚙️ Configuration](#%EF%B8%8F-configuration) • [📱 Support](#--support)
 
 </div>
 
@@ -24,11 +24,11 @@
 
 ### 🎯 Core Plugin Features
 
-- Real-time overlay with MiniMessage formatting
-- Player direction (<PLAYER_FACING>), in-game 24h time (<SERVER_TIME_24_H>), and server days (<STATISTIC_TOTAL_SERVER_DAYS>)
-- Supports PlaceholderAPI for coordinates and more (`%player_x%`, `%player_y%`, `%player_z%`)
+- Real-time overlay using MiniMessage formatting
+- Player direction (`<PLAYER_FACING>`), in-game 24h time (`<SERVER_TIME_24_H>`), and total server days (`<STATISTIC_TOTAL_SERVER_DAYS>`)
+- Supports PlaceholderAPI for coordinates and more: `%player_x%`, `%player_y%`, `%player_z%`, etc.
 - ActionBar display updates on inventory, join, teleport, or world change
-- Fully configurable, lightweight, open source
+- Fully configurable, lightweight, and open source
 
 ---
 
@@ -55,8 +55,8 @@
 
 | Permission Node       | Description                      | Default |
 |:----------------------|:---------------------------------|:--------|
-| `lyttlehotbar.*`      | Grants all plugin permissions    | ❌       |
-| `lyttlehotbar.reload` | Allows reloading config/messages | ❌       |
+| `lyttlehotbar.*`      | Grants all plugin permissions    | ❌      |
+| `lyttlehotbar.reload` | Allows reloading config/messages | ❌      |
 
 ---
 
@@ -91,21 +91,8 @@
 
 #### 🔧 `config.yml`
 
-Main configuration for navigation overlays and formatting.
-
-```yaml
-COMPASS: "<white>X:<yellow>%player_x% <white>Y:<yellow>%player_y% <white>Z:<yellow>%player_z% <gray>| <white><PLAYER_FACING>"
-CLOCK: "<white><SERVER_TIME_24_H> <gray>| <yellow><STATISTIC_TOTAL_SERVER_DAYS> days"
-update_rate: 0.5 # in seconds
-config_version: 0
-```
-
-- You can freely add more entries using any [Material name from available_materials.txt](available_materials.txt) (e.g., `MAP: ...`, `PAPER: ...`) to display custom navigation overlays for those items.
-- Placeholders:
-    - `<PLAYER_FACING>`: Player's direction (e.g., South-East)
-    - `<SERVER_TIME_24_H>`: In-game world time (24h)
-    - `<STATISTIC_TOTAL_SERVER_DAYS>`: Days since world creation
-    - `%player_x%`, `%player_y%`, `%player_z%`, ...: Provided by PlaceholderAPI
+The main configuration file controlling plugin behavior and features.  
+Supports placeholders like `<PLAYER_FACING>`, `<SERVER_TIME_24_H>`, `<STATISTIC_TOTAL_SERVER_DAYS>`, and PlaceholderAPI values such as `%player_x%`, `%player_y%`, `%player_z%`.
 
 #### 💬 `messages.yml`
 
@@ -113,7 +100,7 @@ Customize all plugin messages. Supports MiniMessage formatting.
 
 ### 🔄 The #defaults Folder
 
-The folder serves several important purposes:
+The folder serves several important purposes: `#defaults`
 
 1. **Backup Reference**: Contains original copies of all configuration files
 2. **Reset Option**: Use these to restore default settings
