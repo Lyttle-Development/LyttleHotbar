@@ -30,7 +30,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:" + (property("paperVersion") as String) + "-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
-    implementation("com.lyttledev:lyttleutils:1.1.8-BETA.003")
+    implementation("com.lyttledev:lyttleutils:1.2.0")
 }
 
 group = "com.lyttledev"
