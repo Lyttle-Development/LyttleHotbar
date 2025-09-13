@@ -160,7 +160,7 @@ hangarPublish {
         version.set(versionString)
         channel.set(envChannel)
         changelog.set(changelogContent)
-        id.set("LyttleNametag")
+        id.set("LyttleHotbar")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
             register(Platforms.PAPER) {
@@ -177,7 +177,7 @@ hangarPublish {
 // --- Modrinth Publish Configuration ---
 modrinth {
     token.set(System.getenv("MODRINTH_API_TOKEN")) // Token from workflow secrets
-    projectId.set("lyttlenametag") // Replace with your Modrinth project slug or ID
+    projectId.set("lyttlehotbar") // Replace with your Modrinth project slug or ID
     versionNumber.set(versionString)
     changelog.set(changelogContent)
     uploadFile.set(tasks.named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
